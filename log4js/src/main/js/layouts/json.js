@@ -6,7 +6,7 @@
  * @author Stephan Strittmatter
  */
 Log4js.JSONLayout = function() {
-	this.df = new Log4js.DateFormatter();
+       this.df = new Log4js.DateFormatter();
 };
 Log4js.JSONLayout.prototype = Log4js.extend(new Log4js.Layout(), /** @lends Log4js.JSONLayout# */ {
 	/** 
@@ -38,7 +38,7 @@ Log4js.JSONLayout.prototype = Log4js.extend(new Log4js.Layout(), /** @lends Log4
 		jsonString += this.formatMessage(loggingEvent.message);
 		jsonString += "\t\"referer\": \"" + referer + "\",\n"; 
 		jsonString += "\t\"useragent\": \"" + useragent + "\",\n"; 
-		jsonString += "\t\"timestamp\": \"" +  this.df.formatUTCDate(loggingEvent.startTime, "yyyy-MM-ddThh:mm:ssZ") + "\",\n";
+		jsonString += "\t\"timestamp\": \"" +  loggingEvent.getFormattedTimestamp() + "\",\n";
 		jsonString += "\t\"exception\": \"" +  loggingEvent.exception + "\"\n"; 
 		jsonString += "}}";      
         

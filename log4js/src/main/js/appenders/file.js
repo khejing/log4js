@@ -56,11 +56,11 @@ Log4js.FileAppender.prototype = Log4js.extend(new Log4js.Appender(), /** @lends 
 				this.fso.initWithPath(this.file);
     			if(!this.fso.exists()) {
     				//create file if needed
-            		this.fso.create(0x00, 0600);
+            		this.fso.create(0x00, 0o600);
     			}
 				
  				fileHandle = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance(Components.interfaces.nsIFileOutputStream);
-        		fileHandle.init( this.fso, 0x04 | 0x08 | 0x10, 064, 0);
+        		fileHandle.init( this.fso, 0x04 | 0x08 | 0x10, 0o64, 0);
 				var line = this.layout.format(loggingEvent);
         		fileHandle.write(line, line.length); //write data
         		fileHandle.close();
