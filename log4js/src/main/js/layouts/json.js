@@ -38,8 +38,10 @@ Log4js.JSONLayout.prototype = Log4js.extend(new Log4js.Layout(), /** @lends Log4
 		jsonString += this.formatMessage(loggingEvent.message);
 		jsonString += "\t\"referer\": \"" + referer + "\",\n"; 
 		jsonString += "\t\"useragent\": \"" + useragent + "\",\n"; 
-		jsonString += "\t\"timestamp\": \"" +  loggingEvent.getFormattedTimestamp() + "\",\n";
-		jsonString += "\t\"exception\": \"" +  loggingEvent.exception + "\"\n"; 
+    if(loggingEvent.exception){
+      jsonString += "\t\"exception\": \"" +  loggingEvent.exception + "\",\n";
+    }
+		jsonString += "\t\"timestamp\": \"" +  loggingEvent.getFormattedTimestamp() + "\"\n";
 		jsonString += "}}";      
         
         return jsonString;
@@ -53,7 +55,7 @@ Log4js.JSONLayout.prototype = Log4js.extend(new Log4js.Layout(), /** @lends Log4
     if((typeof message) == "string") {
       stream += "\t\"message\": \"" + message + "\",\n";
     } else if((typeof message) == "object") {
-      if("message" in message) {
+      if(message && message.message) {
         stream += "\t\"message\": \"" + message.message + "\",\n";
       }
       for(var property in message) {

@@ -188,7 +188,7 @@ Log4js.Logger.prototype = {
 	 */
 	windowError: function(msg, url, line){
 		var message = "Error in (" + (url || window.location) + ") on line "+ line +" with message (" + msg + ")";
-		this.log(Log4js.Level.FATAL, message, null);	
+		this.log(Log4js.Level.FATAL, null, message);
 	},
 	
 	/**
