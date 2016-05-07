@@ -38,7 +38,7 @@ Log4js.JSONLayout.prototype = Log4js.extend(new Log4js.Layout(), /** @lends Log4
     if(typeof loggingEvent.message === 'string'){
       event.message = loggingEvent.message;
     }else if(typeof loggingEvent.message === 'object'){
-      Object.assign(event, message);
+      Object.assign(event, loggingEvent.message);
     }
     event.referer = referer;
     event.useragent = useragent;
