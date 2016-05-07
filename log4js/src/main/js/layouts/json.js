@@ -31,7 +31,25 @@ Log4js.JSONLayout.prototype = Log4js.extend(new Log4js.Layout(), /** @lends Log4
 			referer = "unknown";
 		}
 		
-		var jsonString = "{\n \"LoggingEvent\": {\n";
+    var obj = {LoggingEvent: {}};
+    var event = obj.LoggingEvent;
+    event.logger = loggingEvent.categoryName;
+    event.level = loggingEvent.level.toString();
+    if(typeof loggingEvent.message === 'string'){
+      event.message = loggingEvent.message;
+    }else if(typeof loggingEvent.message === 'object'){
+      Object.assign(event, message);
+    }
+    event.referer = referer;
+    event.useragent = useragent;
+    if(loggingEvent.exception){
+      event.exception = loggingEvent.exception.toString();
+    }
+    event.timestamp = loggingEvent.getFormattedTimestamp();
+
+    return JSON.stringify(obj);
+
+    /*var jsonString = "{\n \"LoggingEvent\": {\n";
 		
 		jsonString += "\t\"logger\": \"" +  loggingEvent.categoryName + "\",\n";
 		jsonString += "\t\"level\": \"" +  loggingEvent.level.toString() + "\",\n";
@@ -44,7 +62,7 @@ Log4js.JSONLayout.prototype = Log4js.extend(new Log4js.Layout(), /** @lends Log4
 		jsonString += "\t\"timestamp\": \"" +  loggingEvent.getFormattedTimestamp() + "\"\n";
 		jsonString += "}}";      
         
-        return jsonString;
+    return jsonString;*/
 	},
 
   /**
