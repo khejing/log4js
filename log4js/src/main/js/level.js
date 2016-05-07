@@ -114,31 +114,31 @@ Log4js.Level.OFF = new Log4js.Level(Log4js.Level.OFF_INT, "OFF");
  * @type Log4js.Level
  * @static
  */
-Log4js.Level.FATAL = new Log4js.Level(Log4js.Level.FATAL_INT, "FATAL");
+Log4js.Level.FATAL = new Log4js.Level(Log4js.Level.FATAL_INT, "fatal");
 /** 
  * Logging Level Error
  * @type Log4js.Level
  * @static
  */
-Log4js.Level.ERROR = new Log4js.Level(Log4js.Level.ERROR_INT, "ERROR"); 
+Log4js.Level.ERROR = new Log4js.Level(Log4js.Level.ERROR_INT, "error");
 /** 
  * Logging Level Warn
  * @type Log4js.Level
  * @static
  */
-Log4js.Level.WARN = new Log4js.Level(Log4js.Level.WARN_INT, "WARN");
+Log4js.Level.WARN = new Log4js.Level(Log4js.Level.WARN_INT, "warn");
 /** 
  * Logging Level Info
  * @type Log4js.Level
  * @static
  */
-Log4js.Level.INFO = new Log4js.Level(Log4js.Level.INFO_INT, "INFO");
+Log4js.Level.INFO = new Log4js.Level(Log4js.Level.INFO_INT, "info");
 /** 
  * Logging Level Debug
  * @type Log4js.Level
  * @static
  */
-Log4js.Level.DEBUG = new Log4js.Level(Log4js.Level.DEBUG_INT, "DEBUG");
+Log4js.Level.DEBUG = new Log4js.Level(Log4js.Level.DEBUG_INT, "debug");
 /** 
  * Logging Level Trace
  * @type Log4js.Level
