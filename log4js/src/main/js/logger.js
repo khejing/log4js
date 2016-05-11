@@ -27,11 +27,11 @@ Log4js.Logger = function(name) {
 	// if multiple log objects are instantiated this will only log to the log 
 	// object that is declared last can't seem to get the attachEvent method to 
 	// work correctly
-	try {
+  /*try {
 		window.onerror = this.windowError.bind(this);
 	} catch (e) {
 		//log4jsLogger.fatal(e);
-	}
+  }*/
 };
 
 Log4js.Logger.prototype = {
