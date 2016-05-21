@@ -41,7 +41,7 @@ Log4js.DateFormatter.prototype = {
 	  var vHour  = this.addZero(vDate.getHours());
 	  var vMinute = this.addZero(vDate.getMinutes());
 	  var vSecond = this.addZero(vDate.getSeconds());
-    var vMillisecond = this.addZero(vDate.getMilliseconds());
+    var vMillisecond = this.addZeroZero(vDate.getMilliseconds());
 	  var vTimeZone = this.O(vDate);
 	  var vDateString = vFormat.replace(/dd/g, vDay).replace(/MM/g, vMonth).replace(/y{1,4}/g, vYear);
 	  vDateString = vDateString.replace(/hh/g, vHour).replace(/mm/g, vMinute).replace(/ss/g, vSecond).replace(/SSS/g, vMillisecond);
@@ -83,6 +83,20 @@ Log4js.DateFormatter.prototype = {
 	 */
 	addZero : function(vNumber) {
 	  return ((vNumber < 10) ? "0" : "") + vNumber;
+	},
+
+	/**
+	 * @private
+	 * @static
+	 */
+	addZeroZero : function(vNumber) {
+    if(vNumber < 10){
+      return '00' + vNumber;
+    }else if (vNumber >= 10 && vNumber < 100){
+      return '0' + vNumber;
+    }else{
+      return vNumber;
+    }
 	},
 
 	/**
