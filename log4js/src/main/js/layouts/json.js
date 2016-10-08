@@ -9,28 +9,28 @@ Log4js.JSONLayout = function() {
        this.df = new Log4js.DateFormatter();
 };
 Log4js.JSONLayout.prototype = Log4js.extend(new Log4js.Layout(), /** @lends Log4js.JSONLayout# */ {
-	/** 
+	/**
 	 * Implement this method to create your own layout format.
 	 * @param {Log4js.LoggingEvent} loggingEvent loggingEvent to format
 	 * @return formatted String
 	 * @type String
 	 */
 	format: function(loggingEvent) {
-		
+
 				var useragent = "unknown";
 		try {
 			useragent = navigator.userAgent;
 		} catch(e){
 			useragent = "unknown";
 		}
-		
+
 		var referer = "unknown";
 		try {
 			referer = location.href;
 		} catch(e){
 			referer = "unknown";
 		}
-		
+
     var obj = {LoggingEvent: {}};
     var event = obj.LoggingEvent;
     event.logger = loggingEvent.categoryName;
@@ -38,7 +38,11 @@ Log4js.JSONLayout.prototype = Log4js.extend(new Log4js.Layout(), /** @lends Log4
     if(typeof loggingEvent.message === 'string'){
       event.message = loggingEvent.message;
     }else if(typeof loggingEvent.message === 'object'){
-      Object.assign(event, loggingEvent.message);
+      for(var nextKey in loggingEvent.message){
+        if(loggingEvent.message.hasOwnProperty(nextKey)){
+          event[nextKey] = loggingEvent.message[nextKey];
+        }
+      }
     }
     event.referer = referer;
     event.useragent = useragent;
@@ -50,18 +54,18 @@ Log4js.JSONLayout.prototype = Log4js.extend(new Log4js.Layout(), /** @lends Log4
     return JSON.stringify(obj);
 
     /*var jsonString = "{\n \"LoggingEvent\": {\n";
-		
+
 		jsonString += "\t\"logger\": \"" +  loggingEvent.categoryName + "\",\n";
 		jsonString += "\t\"level\": \"" +  loggingEvent.level.toString() + "\",\n";
 		jsonString += this.formatMessage(loggingEvent.message);
-		jsonString += "\t\"referer\": \"" + referer + "\",\n"; 
-		jsonString += "\t\"useragent\": \"" + useragent + "\",\n"; 
+		jsonString += "\t\"referer\": \"" + referer + "\",\n";
+		jsonString += "\t\"useragent\": \"" + useragent + "\",\n";
     if(loggingEvent.exception){
       jsonString += "\t\"exception\": \"" +  loggingEvent.exception + "\",\n";
     }
 		jsonString += "\t\"timestamp\": \"" +  loggingEvent.getFormattedTimestamp() + "\"\n";
-		jsonString += "}}";      
-        
+		jsonString += "}}";
+
     return jsonString;*/
 	},
 
@@ -100,29 +104,29 @@ Log4js.JSONLayout.prototype = Log4js.extend(new Log4js.Layout(), /** @lends Log4
     }
     return stream;
   },
-	/** 
-	 * Returns the content type output by this layout. 
+	/**
+	 * Returns the content type output by this layout.
 	 * @return The base class returns "text/xml".
 	 * @type String
 	 */
 	getContentType: function() {
 		return "text/json";
 	},
-	/** 
+	/**
 	 * @return Returns the header for the layout format. The base class returns null.
 	 * @type String
 	 */
 	getHeader: function() {
 		return "{\"Log4js\": [\n";
 	},
-	/** 
+	/**
 	 * @return Returns the footer for the layout format. The base class returns null.
 	 * @type String
 	 */
 	getFooter: function() {
 		return "\n]}";
 	},
-	
+
 	getSeparator: function() {
 		return ",\n";
 	}
